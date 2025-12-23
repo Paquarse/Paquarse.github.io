@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Universite Diplome insa</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Layout split */
+.split {
+    display: flex;
+    height: 100vh;
+}
+
+/* Section */
+.section {
+    flex: 1;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: flex 0.8s ease;
+    color: white;
+}
+
+/* Backgrounds */
+.university {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+}
+.diploma {
+    background: linear-gradient(135deg, #42275a, #734b6d);
+}
+
+/* Expansion on hover */
+.section:hover {
+    flex: 1.4;
+}
+
+/* Overlay animation */
+.section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.25);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+.section:hover::before {
+    opacity: 1;
+}
+
+/* Content */
+.content {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+    animation: appear 1s ease forwards;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.content i {
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+.content h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.content p {
+    font-size: 16px;
+    opacity: 0.85;
+}
+
+/* Link full area */
+.section a {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+    .split {
+        flex-direction: column;
+    }
+    .section:hover {
+        flex: 1;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="split">
+    <!-- Université -->
+    <div class="section university">
+        <a href="https://github.com/Paquarse/Paquarse.github.io/blob/main/images/portfolio/DI232v6_MS%20INSA%20Rouen_expert%20en%20sciences%20des%20donn%C3%A9es_web.pdf" target="_blank"></a>
+        <div class="content">
+            <i class="fa-solid fa-building-columns"></i>
+            <h1>INSA ROUEN</h1>
+            <p>Accéder à la plaquette de formation</p>
+        </div>
+    </div>
+
+    <!-- Diplôme -->
+    <div class="section diploma">
+        <a href="https://github.com/Paquarse/Fichier_Personnel/blob/main/Diplomes/FRANCE/Diplome_Master_MAS.pdf" target="_blank"></a>
+        <div class="content">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <h1>Diplôme</h1>
+            <p>Accéder au diplôme</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
