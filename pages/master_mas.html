@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Choix d'accès</title>
+
+<!-- Icônes -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #0077cc, #00c6ff);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Animation d'entrée */
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container {
+    display: flex;
+    gap: 40px;
+    animation: fadeSlide 1s ease forwards;
+}
+
+/* Carte */
+.box {
+    width: 280px;
+    height: 180px;
+    background: white;
+    border-radius: 18px;
+    text-decoration: none;
+    color: #0077cc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Glow animé */
+.box::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0,198,255,0.4), transparent 60%);
+    top: -50%;
+    left: -50%;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* Icône flottante */
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.box i {
+    font-size: 42px;
+    margin-bottom: 15px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.box span {
+    font-size: 18px;
+    font-weight: 600;
+    z-index: 1;
+}
+
+/* Hover */
+.box:hover {
+    transform: translateY(-12px) scale(1.08) rotate(1deg);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+    color: white;
+    background: linear-gradient(135deg, #0077cc, #00c6ff);
+}
+
+.box:hover::before {
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .container {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <a href="https://formations.univ-rennes.fr/master-mention-mathematiques-appliquees-statistique-parcours-science-des-donnees-statistique-et"
+       class="box" target="_blank">
+        <i class="fa-solid fa-building-columns"></i>
+        <span>Site de l'université</span>
+    </a>
+
+    <a href="pages/Diplomes/Master_MAS.pdf"
+       class="box" target="_blank">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>Accéder au diplôme</span>
+    </a>
+</div>
+
+</body>
+</html>
