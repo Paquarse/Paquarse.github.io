@@ -218,6 +218,11 @@ footer a:not(.nav-link) {
   margin: 0 auto;
 }
 
+.container-narrow-exp {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
 .text-small {
   font-size: 0.875rem;
 }
