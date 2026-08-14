@@ -17,7 +17,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
       <div class="container">
         <a class="link-dark navbar-brand site-title mb-0" href="../../index.html">Portfolio</a>
-        <a class="btn btn-outline-primary btn-sm ms-auto" href="../../index.html#experience">
+        <a class="exp-back-btn ms-auto" href="../../index.html#experience">
           <i class="fas fa-arrow-left"></i> Retour aux expériences
         </a>
       </div>
@@ -26,36 +26,91 @@
 
   <div class="section px-3 px-lg-4 pt-5">
     <div class="container-narrow">
-      <div class="text-center mb-4">
-        <img src="../../images/services/machine.svg" width="96" height="96" alt="Orange Business"/>
-        <h1 class="marker marker-center mt-3">Orange Business</h1>
-        <p class="lead mb-1"><b>Alternant Data Analyst</b></p>
-        <p class="text-muted mb-0"><i class="fas fa-calendar-alt"></i> Septembre 2022 - Août 2024</p>
-        <p class="text-muted"><i class="fas fa-map-marker-alt"></i> Rennes, Bretagne, France</p>
-      </div>
 
-      <div class="card mb-4 shadow-sm">
-        <div class="card-body px-4 py-3">
-          <h3 class="h5 mb-3"><i class="fas fa-tasks text-primary"></i> Missions & Réalisations</h3>
-          <ul>
-            <li>Classification de tickets d'incident et prédiction d'équipe de traitement de tickets.</li>
-            <li>Prévision de la durée des incidents sur les offres cloud d'Orange Business.</li>
-            <li><b>Analyse et accompagnement stratégique :</b> collaboration avec les équipes métiers pour comprendre leurs problématiques et proposer des solutions analytiques adaptées, orientant les stratégies marketing et commerciales.</li>
-            <li><b>Traitement de données volumineuses :</b> manipulation de bases de données NoSQL (Elasticsearch).</li>
-            <li><b>Analyse avancée et insights exploitables :</b> réalisation d'analyses statistiques approfondies (segmentation, scoring, modélisation prédictive) en Python et à l'aide d'outils analytiques modernes, pour répondre aux besoins marketing et opérationnels.</li>
-            <li><b>Automatisation et data visualisation :</b> création et automatisation de tableaux de bord interactifs et de rapports sur mesure (Kibana), facilitant la prise de décision basée sur des KPI clairs et précis.</li>
-            <li><b>Qualité et fiabilité des données :</b> mise en place de processus de contrôle qualité rigoureux pour garantir l'intégrité des données utilisées dans les analyses et projets.</li>
-            <li>Travail dans un environnement international (France, Inde, Île-Maurice et Égypte).</li>
-            <li><b>Formation et promotion de la culture data :</b> sensibilisation et formation des équipes internes à l'utilisation des outils analytiques à travers des guides pratiques, renforçant leur autonomie et leur capacité à exploiter les données.</li>
-          </ul>
-
-          <h3 class="h5 mt-4 mb-3"><i class="fas fa-tools text-primary"></i> Outils</h3>
-          <p><b>Elasticsearch, Python, JIRA, KQL, Teams, Kibana</b></p>
+      <!-- Hero -->
+      <div class="exp-detail-hero">
+        <div class="exp-detail-hero__badge">
+          <img src="../../images/experiences/Orange_Business_Services-Logo.wine.svg" alt="Logo Orange Business"/>
+        </div>
+        <h1 class="marker marker-center mt-2">Orange Business</h1>
+        <p class="exp-detail-hero__role">Alternant Data Analyst</p>
+        <div class="exp-detail-hero__meta">
+          <span><i class="fas fa-calendar-alt"></i> Septembre 2022 – Août 2024</span>
+          <span><i class="fas fa-map-marker-alt"></i> Rennes, Bretagne, France</span>
         </div>
       </div>
 
-      <div class="text-center mb-5">
-        <a class="btn btn-primary shadow-sm hover-effect" href="../../index.html#experience">
+      <!-- Missions -->
+      <div class="exp-detail-section">
+        <h2 class="exp-detail-section__title">
+          <span class="exp-detail-section__title-icon"><i class="fas fa-tasks"></i></span>
+          Missions &amp; Réalisations
+        </h2>
+        <ul class="mission-list">
+          <li><b>Analyse et accompagnement stratégique :</b> collaboration avec les équipes métiers pour comprendre leurs problématiques et proposer des solutions analytiques adaptées, orientant les stratégies marketing et commerciales.</li>
+          <li><b>Traitement de données volumineuses :</b> manipulation de bases de données NoSQL (Elasticsearch) à grande échelle.</li>
+          <li><b>Analyse avancée &amp; insights exploitables :</b> réalisation d'analyses statistiques approfondies (segmentation, scoring, modélisation prédictive) en Python, pour répondre aux besoins marketing et opérationnels.</li>
+          <li><b>Qualité et fiabilité des données :</b> mise en place de processus de contrôle qualité rigoureux pour garantir l'intégrité des données utilisées dans les analyses.</li>
+          <li>Collaboration dans un <b>environnement international</b> — France, Inde, Île Maurice et Égypte.</li>
+        </ul>
+      </div>
+
+      <!-- Réalisations phares -->
+      <div class="exp-detail-section">
+        <h2 class="exp-detail-section__title">
+          <span class="exp-detail-section__title-icon"><i class="fas fa-star"></i></span>
+          Réalisations phares
+        </h2>
+        <div class="highlight-grid">
+          <div class="highlight-card">
+            <h3 class="highlight-card__title"><i class="fas fa-tags"></i> Classification de tickets d'incident</h3>
+            <p class="highlight-card__desc">
+              Développement d'un modèle de classification des tickets d'incident et de
+              <b>prédiction de l'équipe de traitement</b> pour accélérer la résolution.
+            </p>
+          </div>
+          <div class="highlight-card">
+            <h3 class="highlight-card__title"><i class="fas fa-clock"></i> Prévision de la durée des incidents</h3>
+            <p class="highlight-card__desc">
+              Modèle prédictif de la <b>durée de résolution</b> des incidents sur les
+              offres cloud d'Orange Business, aidant au pilotage opérationnel.
+            </p>
+          </div>
+          <div class="highlight-card">
+            <h3 class="highlight-card__title"><i class="fas fa-tachometer-alt"></i> Dashboards Kibana automatisés</h3>
+            <p class="highlight-card__desc">
+              Création et automatisation de <b>tableaux de bord interactifs</b> et de
+              rapports sur mesure, facilitant la prise de décision sur des KPI clairs et précis.
+            </p>
+          </div>
+          <div class="highlight-card">
+            <h3 class="highlight-card__title"><i class="fas fa-graduation-cap"></i> Culture data en interne</h3>
+            <p class="highlight-card__desc">
+              Sensibilisation et <b>formation des équipes internes</b> à l'utilisation
+              des outils analytiques à travers des guides pratiques, renforçant leur autonomie.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Outils -->
+      <div class="exp-detail-section">
+        <h2 class="exp-detail-section__title">
+          <span class="exp-detail-section__title-icon"><i class="fas fa-tools"></i></span>
+          Boîte à outils
+        </h2>
+        <div>
+          <span class="tool-pill">Python</span>
+          <span class="tool-pill">Elasticsearch</span>
+          <span class="tool-pill">Kibana</span>
+          <span class="tool-pill">KQL</span>
+          <span class="tool-pill">JIRA</span>
+          <span class="tool-pill">Microsoft Teams</span>
+        </div>
+      </div>
+
+      <div class="text-center mb-5 mt-4">
+        <a class="exp-back-btn" href="../../index.html#experience">
           <i class="fas fa-arrow-left"></i> Retour aux expériences
         </a>
       </div>

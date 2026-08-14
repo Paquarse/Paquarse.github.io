@@ -17,7 +17,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
       <div class="container">
         <a class="link-dark navbar-brand site-title mb-0" href="../../index.html">Portfolio</a>
-        <a class="btn btn-outline-primary btn-sm ms-auto" href="../../index.html#experience">
+        <a class="exp-back-btn ms-auto" href="../../index.html#experience">
           <i class="fas fa-arrow-left"></i> Retour aux expériences
         </a>
       </div>
@@ -26,38 +26,98 @@
 
   <div class="section px-3 px-lg-4 pt-5">
     <div class="container-narrow">
-      <div class="text-center mb-4">
-        <img src="../../images/services/machine.svg" width="96" height="96" alt="Catalina Marketing"/>
-        <h1 class="marker marker-center mt-3">Catalina Marketing France</h1>
-        <p class="lead mb-1"><b>Data Analyst</b></p>
-        <p class="text-muted mb-0"><i class="fas fa-calendar-alt"></i> Janvier 2025 - Aujourd'hui</p>
-        <p class="text-muted"><i class="fas fa-map-marker-alt"></i> Boulogne-Billancourt, Île-de-France, France</p>
-      </div>
 
-      <div class="card mb-4 shadow-sm">
-        <div class="card-body px-4 py-3">
-          <h3 class="h5 mb-3"><i class="fas fa-tasks text-primary"></i> Missions & Réalisations</h3>
-          <ul>
-            <li>Automatisation d'analyses et de visualisation avec Python, SQL et Rundeck.</li>
-            <li>Conception et proposition de nouvelles analyses et méthodologies d'analyse pour répondre à des problématiques métier :
-              <ul>
-                <li>Analyse de rémanence</li>
-                <li>Analyse de l'impact des campagnes DOOH</li>
-                <li>Analyse Lifestage</li>
-                <li>Analyse New Item Tracker</li>
-              </ul>
-            </li>
-            <li>Traitement et optimisation de données volumineuses, optimisation de requêtes SQL.</li>
-            <li>Participation à des échanges avec des équipes transversales (Data Science, Analytics, IT), enrichissant les méthodologies par l'intégration d'algorithmes d'IA/ML.</li>
-          </ul>
-
-          <h3 class="h5 mt-4 mb-3"><i class="fas fa-tools text-primary"></i> Outils</h3>
-          <p><b>Python, SQL, Databricks, Snowflake, VSCode, Power BI</b></p>
+      <!-- Hero -->
+      <div class="exp-detail-hero">
+        <div class="exp-detail-hero__badge">
+          <img src="../../images/experiences/Catalina.png" alt="Logo Catalina Marketing"/>
+        </div>
+        <h1 class="marker marker-center mt-2">Catalina Marketing France</h1>
+        <p class="exp-detail-hero__role">Data Analyst</p>
+        <div class="exp-detail-hero__meta">
+          <span><i class="fas fa-calendar-alt"></i> Janvier 2025 – Aujourd'hui</span>
+          <span><i class="fas fa-map-marker-alt"></i> Boulogne-Billancourt, Île-de-France, France</span>
         </div>
       </div>
 
-      <div class="text-center mb-5">
-        <a class="btn btn-primary shadow-sm hover-effect" href="../../index.html#experience">
+      <!-- Missions -->
+      <div class="exp-detail-section">
+        <h2 class="exp-detail-section__title">
+          <span class="exp-detail-section__title-icon"><i class="fas fa-tasks"></i></span>
+          Missions &amp; Réalisations
+        </h2>
+        <ul class="mission-list">
+          <li><b>Automatisation d'analyses et de visualisations</b> avec Python, SQL et Rundeck.</li>
+          <li><b>Conception et proposition de nouvelles analyses et méthodologies</b> pour répondre à des problématiques métiers <span class="text-muted">(voir Réalisations phares ci-dessous)</span>.</li>
+          <li>Mise en place d'un processus de <b>matching des magasins</b> entre les bases de données de Catalina et de ses partenaires.</li>
+          <li><b>Traitement de données volumineuses</b> et optimisation de requêtes SQL sur Databricks &amp; Snowflake.</li>
+          <li>Participation à des échanges avec des équipes transversales (Data Science, Analytics, IT), enrichissant les méthodologies par l'intégration d'algorithmes d'<b>IA / ML</b>.</li>
+        </ul>
+      </div>
+
+      <!-- Réalisations phares -->
+      <div class="exp-detail-section">
+        <h2 class="exp-detail-section__title">
+          <span class="exp-detail-section__title-icon"><i class="fas fa-star"></i></span>
+          Réalisations phares
+        </h2>
+        <div class="highlight-grid">
+          <div class="highlight-card">
+            <h3 class="highlight-card__title"><i class="fas fa-wave-square"></i> Analyse de rémanence</h3>
+            <p class="highlight-card__desc">
+              Amélioration de la méthodologie en développant des <b>périodes de remontée dynamiques par client</b>,
+              ajustées aux comportements d'achat individuels, plutôt qu'une fenêtre fixe uniforme.
+            </p>
+          </div>
+          <div class="highlight-card">
+            <h3 class="highlight-card__title"><i class="fas fa-ad"></i> Impact des campagnes DOOH</h3>
+            <p class="highlight-card__desc">
+              Mise en place d'une nouvelle approche de mesure de l'<b>impact réel des campagnes DOOH</b>,
+              intégrant l'effet sur la marque élargie, l'impact post-animation et l'effet de stockage produit.
+            </p>
+          </div>
+          <div class="highlight-card">
+            <h3 class="highlight-card__title"><i class="fas fa-user-plus"></i> New Item Tracker</h3>
+            <p class="highlight-card__desc">
+              Analyse à <b>360°</b> des nouveaux acheteurs d'une innovation : suivi de la courbe d'essai,
+              identification de la provenance des acheteurs, analyse affinitaire et segmentation par lifestage.
+            </p>
+          </div>
+          <div class="highlight-card">
+            <h3 class="highlight-card__title"><i class="fas fa-user-tag"></i> Perso 3.0</h3>
+            <p class="highlight-card__desc">
+              Conception et déploiement d'un dispositif de <b>personnalisation des offres manufacturier</b>
+              au sein de l'application Coupon Network, adapté aux profils et comportements des utilisateurs.
+            </p>
+          </div>
+        </div>
+        <p class="mt-3 mb-0 small text-muted">
+          <b>Autres analyses menées :</b> Lifestage, Class Analysis, Analyse Affinitaire, Analysis of Hourly Distribution.
+        </p>
+      </div>
+
+      <!-- Outils -->
+      <div class="exp-detail-section">
+        <h2 class="exp-detail-section__title">
+          <span class="exp-detail-section__title-icon"><i class="fas fa-tools"></i></span>
+          Boîte à outils
+        </h2>
+        <div>
+          <span class="tool-pill">Python</span>
+          <span class="tool-pill">SQL</span>
+          <span class="tool-pill">Databricks</span>
+          <span class="tool-pill">Snowflake</span>
+          <span class="tool-pill">Azure</span>
+          <span class="tool-pill">Rundeck</span>
+          <span class="tool-pill">Streamlit</span>
+          <span class="tool-pill">Power BI</span>
+          <span class="tool-pill">Git</span>
+          <span class="tool-pill">VS Code</span>
+        </div>
+      </div>
+
+      <div class="text-center mb-5 mt-4">
+        <a class="exp-back-btn" href="../../index.html#experience">
           <i class="fas fa-arrow-left"></i> Retour aux expériences
         </a>
       </div>
