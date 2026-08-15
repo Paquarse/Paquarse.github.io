@@ -87,5 +87,24 @@
 
   // Add your javascript here
 
+  /**
+   * Timeline Parcours — déclenche les animations quand la timeline entre à l'écran
+   */
+  const eduTimeline = document.querySelector('[data-edu-timeline]');
+  if (eduTimeline && 'IntersectionObserver' in window) {
+    const eduObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
+    eduObserver.observe(eduTimeline);
+  } else if (eduTimeline) {
+    // Fallback : anime immédiatement si IntersectionObserver indisponible
+    eduTimeline.classList.add('is-visible');
+  }
+
 
 })();

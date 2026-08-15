@@ -942,6 +942,494 @@ footer a:not(.nav-link) {
   .highlight-grid { grid-template-columns: 1fr; }
 }
 
+/* ========== Parcours Académique — Cartes lisibles avec temporalité ========== */
+.edu-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 8px 0 36px;
+}
+
+/* Trait de temporalité sous les cartes — timeline baseline */
+.edu-grid::before {
+  content: "";
+  position: absolute;
+  bottom: 14px;
+  left: 3%;
+  right: 3%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(99, 102, 241, 0.4) 0,
+    rgba(99, 102, 241, 0.4) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.3s cubic-bezier(.16, 1, .3, 1) .2s;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.edu-grid.is-visible::before {
+  transform: scaleX(1);
+}
+
+/* Point indigo qui glisse le long du trait */
+.edu-grid::after {
+  content: "";
+  position: absolute;
+  bottom: 14px;
+  left: 12.5%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+  transform: translate(-50%, 50%) scale(0);
+  z-index: 2;
+  pointer-events: none;
+  transition:
+    transform .4s cubic-bezier(.16, 1, .3, 1) 1.4s,
+    left .55s cubic-bezier(.16, 1, .3, 1),
+    box-shadow .35s ease,
+    background-color .35s ease;
+}
+
+.edu-grid.is-visible::after {
+  transform: translate(-50%, 50%) scale(1);
+  animation: eduDotTravel 6.4s cubic-bezier(.65, 0, .35, 1) 1.6s infinite alternate;
+}
+
+/* Le point se cale sous la carte survolée + grossit + s'illumine */
+.edu-grid.is-visible:has(.edu-card:nth-child(1):hover)::after {
+  animation: none;
+  left: 12.5%;
+}
+.edu-grid.is-visible:has(.edu-card:nth-child(2):hover)::after {
+  animation: none;
+  left: 37.5%;
+}
+.edu-grid.is-visible:has(.edu-card:nth-child(3):hover)::after {
+  animation: none;
+  left: 62.5%;
+}
+.edu-grid.is-visible:has(.edu-card:nth-child(4):hover)::after {
+  animation: none;
+  left: 87.5%;
+}
+
+.edu-grid.is-visible:has(.edu-card:hover)::after {
+  transform: translate(-50%, 50%) scale(1.5);
+  box-shadow:
+    0 0 0 6px rgba(99, 102, 241, 0.2),
+    0 0 22px rgba(99, 102, 241, 0.55);
+}
+
+@keyframes eduDotTravel {
+  0%   { left: 12.5%; }
+  33%  { left: 37.5%; }
+  66%  { left: 62.5%; }
+  100% { left: 87.5%; }
+}
+
+.edu-card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  min-height: 320px;
+  padding: 22px 20px 20px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 22px;
+  overflow: hidden;
+  isolation: isolate;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+  /* État repos pour l'entrée blur → sharp */
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(8px);
+  transition:
+    opacity .7s cubic-bezier(.16, 1, .3, 1),
+    transform .8s cubic-bezier(.16, 1, .3, 1),
+    filter .8s cubic-bezier(.16, 1, .3, 1),
+    border-color .35s ease,
+    box-shadow .45s cubic-bezier(.16, 1, .3, 1);
+}
+
+/* Voile indigo radial visible au survol */
+.edu-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(80% 60% at 50% 0%, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0) 60%);
+  opacity: 0;
+  transition: opacity .55s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Entrée en cascade quand la section devient visible */
+.edu-grid.is-visible .edu-card {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition-delay: calc(var(--edu-i, 0) * 100ms);
+}
+
+.edu-card:hover {
+  color: inherit;
+  text-decoration: none;
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+  transform: translateY(-4px);
+}
+
+.edu-card:hover::before { opacity: 1; }
+
+.edu-card:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 3px;
+}
+
+/* 1️⃣ Niveau (Mastère / Master / Licence) — en haut */
+.edu-card__level {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #6366f1;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.09);
+  white-space: nowrap;
+}
+
+.edu-card__level::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #6366f1;
+  flex-shrink: 0;
+}
+
+/* 2️⃣ Logo circulaire — au centre */
+.edu-card__logo {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 84px;
+  padding: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 50%;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
+  flex-shrink: 0;
+  margin: 4px 0 2px;
+  transition:
+    transform .5s cubic-bezier(.16, 1, .3, 1),
+    box-shadow .4s ease,
+    border-color .35s ease;
+}
+
+/* Anneau indigo décoratif autour du logo */
+.edu-card__logo::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 1.5px dashed rgba(99, 102, 241, 0.25);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0.85) rotate(0deg);
+  transition: opacity .5s ease, transform .8s cubic-bezier(.16, 1, .3, 1);
+}
+
+.edu-card__logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.edu-card:hover .edu-card__logo {
+  transform: scale(1.08) rotate(-6deg);
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 12px 24px rgba(99, 102, 241, 0.2);
+}
+
+.edu-card:hover .edu-card__logo::before {
+  opacity: 1;
+  transform: scale(1) rotate(45deg);
+}
+
+/* 3️⃣ École — sous le logo */
+.edu-card__school {
+  position: relative;
+  z-index: 1;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 4px 0 0;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+/* 4️⃣ Diplôme (intitulé complet) — en bas, au-dessus de la date */
+.edu-card__degree {
+  position: relative;
+  z-index: 1;
+  font-size: .84rem;
+  color: #4b4d60;
+  margin: 0;
+  line-height: 1.5;
+  max-width: 92%;
+  flex-grow: 1;
+}
+
+/* 5️⃣ Temporalité — pastille finale */
+.edu-card__meta {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.06);
+  font-size: .78rem;
+  font-weight: 600;
+  color: #6b6d80;
+  margin-top: 4px;
+  transition: background .35s ease, color .35s ease, transform .4s cubic-bezier(.16, 1, .3, 1);
+}
+
+.edu-card__meta i {
+  font-size: .9rem;
+  color: #6366f1;
+  transition: transform .4s cubic-bezier(.16, 1, .3, 1);
+}
+
+.edu-card:hover .edu-card__meta {
+  background: rgba(99, 102, 241, 0.14);
+  color: #1a1a1a;
+  transform: translateY(-1px);
+}
+
+.edu-card:hover .edu-card__meta i {
+  transform: scale(1.15) rotate(-4deg);
+}
+
+/* Accessibilité — désactive toutes les animations */
+@media (prefers-reduced-motion: reduce) {
+  .edu-card,
+  .edu-card__logo,
+  .edu-card__logo::before,
+  .edu-card__meta,
+  .edu-card__meta i,
+  .edu-grid::before,
+  .edu-grid::after {
+    transition: none !important;
+    animation: none !important;
+  }
+  .edu-card { opacity: 1; transform: none; filter: none; }
+  .edu-grid::before { transform: scaleX(1); }
+  .edu-grid::after  { transform: translate(-50%, 50%) scale(1); left: 50%; }
+}
+
+/* Tablette : 2 colonnes */
+@media (max-width: 991.98px) {
+  .edu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 700px; }
+  .edu-card { min-height: 300px; }
+  /* Trait horizontal cassé par le passage à 2 lignes → on le masque */
+  .edu-grid::before,
+  .edu-grid::after { display: none; }
+}
+
+/* Mobile : 1 colonne, format compact */
+@media (max-width: 575.98px) {
+  .edu-grid { grid-template-columns: 1fr; gap: 14px; max-width: 380px; }
+  .edu-card { min-height: 0; padding: 20px 18px 18px; }
+  .edu-card__logo { width: 72px; height: 72px; padding: 12px; }
+  .edu-card__school { font-size: 1rem; }
+  .edu-card__degree { font-size: .8rem; }
+  .edu-card__meta { font-size: .76rem; }
+}
+
+/* ========== Cartes Projets — Portfolio (format horizontal compact) ========== */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 991.98px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    max-width: 620px;
+  }
+}
+
+/* Carte = ligne horizontale [miniature | contenu] */
+.project-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  text-decoration: none;
+  color: inherit;
+  isolation: isolate;
+  transition: transform .35s cubic-bezier(.65, 0, .35, 1),
+              box-shadow .35s ease,
+              border-color .35s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(99, 102, 241, 0.28);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.07);
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Miniature carrée à gauche */
+.project-card__media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: #f4f4f7;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.project-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .5s cubic-bezier(.65, 0, .35, 1);
+}
+
+.project-card:hover .project-card__media img { transform: scale(1.08); }
+
+/* Icône action (GitHub / PDF) — pastille discrète en bas à droite de la miniature */
+.project-card__icon {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.95);
+  color: #1a1a1a;
+  border-radius: 8px;
+  font-size: .78rem;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(6px);
+  transition: background .3s ease, color .3s ease;
+  z-index: 2;
+}
+
+.project-card:hover .project-card__icon {
+  background: #6366f1;
+  color: #ffffff;
+}
+
+/* Corps compact */
+.project-card__body {
+  padding: 12px 40px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  min-width: 0;
+}
+
+.project-card__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #8a8ba0;
+}
+
+.project-card__tag::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #6366f1;
+  flex-shrink: 0;
+}
+
+.project-card__title {
+  font-size: .88rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Petit chevron à droite qui glisse au hover */
+.project-card__body::after {
+  content: "\2192"; /* → */
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #cfd0da;
+  transition: transform .35s ease, color .35s ease;
+  pointer-events: none;
+}
+
+.project-card:hover .project-card__body::after {
+  color: #6366f1;
+  transform: translateY(-50%) translateX(4px);
+}
+
+@media (max-width: 575.98px) {
+  .project-card { grid-template-columns: 92px 1fr; border-radius: 12px; }
+  .project-card__body { padding: 10px 34px 10px 12px; gap: 4px; }
+  .project-card__title { font-size: .82rem; }
+  .project-card__icon { width: 22px; height: 22px; font-size: .68rem; bottom: 4px; right: 4px; }
+  .project-card__body::after { right: 10px; font-size: .9rem; }
+}
+
 /* ========== Cartes Certifications — Style "Tuile sticker" ========== */
 .cert-grid {
   display: grid;
