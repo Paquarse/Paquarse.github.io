@@ -2,119 +2,314 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Choix d'accès</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Master MAS – Mathématiques Appliquées & Statistique</title>
 
 <!-- Icônes -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Police moderne -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --c1: #64748b;   /* slate      */
+    --c2: #7c9cbf;   /* bleu doux  */
+    --c3: #8b7fb8;   /* lavande    */
+    --c4: #b98ca3;   /* rose poudré*/
+    --glass: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --text: #f1f5f9;
+    --text-muted: rgba(241, 245, 249, 0.65);
+}
+
 body {
-    font-family: "Segoe UI", sans-serif;
-    background: linear-gradient(135deg, #0077cc, #00c6ff);
+    font-family: 'Inter', 'Segoe UI', sans-serif;
     min-height: 100vh;
+    background: #0b1220;
+    color: var(--text);
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
-    overflow: hidden;
-}
-
-/* Animation d'entrée */
-@keyframes fadeSlide {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.container {
-    display: flex;
-    gap: 40px;
-    animation: fadeSlide 1s ease forwards;
-}
-
-/* Carte */
-.box {
-    width: 280px;
-    height: 180px;
-    background: white;
-    border-radius: 18px;
-    text-decoration: none;
-    color: #0077cc;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    padding: 40px 20px;
+    overflow-x: hidden;
     position: relative;
-    overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* Glow animé */
-.box::before {
+/* ---------- Fond animé « mesh gradient » ---------- */
+.blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(130px);
+    opacity: 0.32;
+    z-index: 0;
+    animation: drift 22s ease-in-out infinite;
+    pointer-events: none;
+}
+.blob-1 { width: 480px; height: 480px; background: var(--c2); top: -120px; left: -100px; }
+.blob-2 { width: 520px; height: 520px; background: var(--c3); bottom: -160px; right: -140px; animation-delay: -6s; }
+.blob-3 { width: 380px; height: 380px; background: var(--c1); top: 40%; left: 55%; animation-delay: -12s; opacity: 0.22; }
+.blob-4 { width: 300px; height: 300px; background: var(--c4); top: 15%; right: 10%; animation-delay: -3s; opacity: 0.18; }
+
+@keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%      { transform: translate(60px, -40px) scale(1.08); }
+    66%      { transform: translate(-40px, 50px) scale(0.95); }
+}
+
+/* ---------- Bouton retour ---------- */
+.back-btn {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: var(--glass);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--glass-border);
+    border-radius: 999px;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+    transform: translateX(-4px);
+}
+
+/* ---------- Contenu principal ---------- */
+.wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 980px;
+    text-align: center;
+    animation: fadeUp 0.9s ease both;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 22px;
+    letter-spacing: 0.5px;
+}
+.badge .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 12px #22c55e;
+    animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+    50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.6rem);
+    font-weight: 700;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #fff 0%, #cbd5e1 60%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 14px;
+}
+.subtitle {
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 50px;
+    line-height: 1.6;
+}
+
+/* ---------- Grille de cartes ---------- */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+.card {
+    position: relative;
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 36px 28px;
+    text-decoration: none;
+    color: var(--text);
+    text-align: left;
+    overflow: hidden;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.5s ease,
+                border-color 0.5s ease;
+    animation: cardIn 0.8s ease both;
+}
+.card:nth-child(1) { animation-delay: 0.15s; }
+.card:nth-child(2) { animation-delay: 0.3s; }
+
+@keyframes cardIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Halo interne au hover */
+.card::before {
     content: "";
     position: absolute;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(0,198,255,0.4), transparent 60%);
-    top: -50%;
-    left: -50%;
+    inset: 0;
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%),
+                                 rgba(255, 255, 255, 0.18), transparent 40%);
     opacity: 0;
     transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+.card:hover::before { opacity: 1; }
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, 0.28);
+    box-shadow: 0 30px 60px -20px rgba(124, 156, 191, 0.35);
 }
 
-/* Icône flottante */
-@keyframes float {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+.icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    background: linear-gradient(135deg, var(--c2), var(--c3));
+    box-shadow: 0 10px 30px -10px rgba(124, 156, 191, 0.4);
+    transition: transform 0.5s ease;
+}
+.card:nth-child(2) .icon-wrap {
+    background: linear-gradient(135deg, var(--c3), var(--c4));
+    box-shadow: 0 10px 30px -10px rgba(185, 140, 163, 0.35);
+}
+.card:hover .icon-wrap {
+    transform: scale(1.1) rotate(-5deg);
 }
 
-.box i {
-    font-size: 42px;
-    margin-bottom: 15px;
-    animation: float 3s ease-in-out infinite;
+.card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 8px;
 }
-
-.box span {
-    font-size: 18px;
+.card p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+.card .arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
     font-weight: 600;
-    z-index: 1;
+    color: #fff;
+    transition: gap 0.3s ease;
 }
-
-/* Hover */
-.box:hover {
-    transform: translateY(-12px) scale(1.08) rotate(1deg);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.25);
-    color: white;
-    background: linear-gradient(135deg, #0077cc, #00c6ff);
-}
-
-.box:hover::before {
-    opacity: 1;
-}
+.card:hover .arrow { gap: 12px; }
 
 /* Responsive */
-@media (max-width: 700px) {
-    .container {
-        flex-direction: column;
-    }
+@media (max-width: 600px) {
+    .back-btn { top: 16px; left: 16px; padding: 8px 14px; font-size: 13px; }
+    .cards { gap: 18px; }
+    .card { padding: 28px 22px; }
 }
 </style>
 </head>
 <body>
 
-<div class="container">
-    <a href="https://formations.univ-rennes.fr/master-mention-mathematiques-appliquees-statistique-parcours-science-des-donnees-statistique-et"
-       class="box" target="_blank">
-        <i class="fa-solid fa-building-columns"></i>
-        <span>Site de l'université</span>
-    </a>
+<!-- Fond animé -->
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+<div class="blob blob-4"></div>
 
-    <a href="../pages/Diplomes/Master_MAS.pdf"
-       class="box" target="_blank">
-        <i class="fa-solid fa-graduation-cap"></i>
-        <span>Accéder au diplôme</span>
-    </a>
-</div>
+<!-- Bouton retour -->
+<a href="../index.html#services" class="back-btn">
+    <i class="fa-solid fa-arrow-left"></i>
+    <span>Retour</span>
+</a>
+
+<!-- Contenu -->
+<main class="wrapper">
+    <div class="badge">
+        <span class="dot"></span>
+        <span>Diplôme obtenu</span>
+    </div>
+
+    <h1>Master MAS<br>Science des Données &amp; Statistique</h1>
+    <p class="subtitle">
+        Master mention Mathématiques Appliquées, Statistique — parcours Science des Données et Statistique
+        à l'Université de Rennes. Choisissez ce que vous souhaitez consulter.
+    </p>
+
+    <div class="cards">
+        <a href="https://formations.univ-rennes.fr/master-mention-mathematiques-appliquees-statistique-parcours-science-des-donnees-statistique-et"
+           class="card" target="_blank" rel="noopener">
+            <span class="icon-wrap"><i class="fa-solid fa-building-columns"></i></span>
+            <h3>Site de l'université</h3>
+            <p>Découvrez le programme, les compétences visées et le contenu pédagogique du parcours.</p>
+            <span class="arrow">
+                Visiter <i class="fa-solid fa-arrow-right"></i>
+            </span>
+        </a>
+
+        <a href="../pages/Diplomes/Master_MAS.pdf"
+           class="card" target="_blank" rel="noopener">
+            <span class="icon-wrap"><i class="fa-solid fa-graduation-cap"></i></span>
+            <h3>Accéder au diplôme</h3>
+            <p>Consultez la version PDF officielle du diplôme.</p>
+            <span class="arrow">
+                Ouvrir le PDF <i class="fa-solid fa-arrow-right"></i>
+            </span>
+        </a>
+    </div>
+</main>
+
+<script>
+    // Effet halo qui suit la souris sur les cartes
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--x', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--y', `${e.clientY - rect.top}px`);
+        });
+    });
+</script>
 
 </body>
 </html>

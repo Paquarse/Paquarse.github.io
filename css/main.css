@@ -44,6 +44,15 @@ html {
   color: rgba(0, 0, 0, 0.8) !important;
 }
 
+/* Compact header nav to fit all items on a single line */
+@media (min-width: 992px) {
+  .nav-compact .nav-link {
+    font-size: 0.9rem;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+  }
+}
+
 .social-nav .nav-link {
   padding: 0 0.5rem;
   font-size: 1.1rem;
