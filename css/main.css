@@ -65,6 +65,60 @@ html {
   color: rgba(0, 0, 0, 0.6) !important;
 }
 
+/* ========== Navbar — lentille glissante de section active ========== */
+.nav-compact {
+  position: relative;
+}
+
+.nav-lens {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.10);
+  border: 1px solid rgba(99, 102, 241, 0.18);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.12),
+              inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  -webkit-backdrop-filter: saturate(160%) blur(6px);
+          backdrop-filter: saturate(160%) blur(6px);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 0;
+  will-change: transform, width, height;
+  transition: transform .42s cubic-bezier(.22, 1, .36, 1),
+              width .42s cubic-bezier(.22, 1, .36, 1),
+              height .42s cubic-bezier(.22, 1, .36, 1),
+              opacity .25s ease;
+}
+
+.nav-lens.is-ready {
+  opacity: 1;
+}
+
+/* Les liens passent au-dessus de la lentille */
+.nav-compact .nav-item {
+  position: relative;
+  z-index: 1;
+}
+
+.nav-compact .nav-link {
+  border-radius: 999px;
+  transition: color .3s ease;
+}
+
+.nav-compact .nav-link.is-active {
+  color: #4f46e5 !important;
+  font-weight: 800;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-lens {
+    transition: opacity .25s ease;
+  }
+}
+
 /* Hero (intro) section */
 .intro-title {
   font-weight: 800;
@@ -1732,5 +1786,170 @@ footer a:not(.nav-link) {
 .cert-card--more .cert-card__title { color: #1a1a1a; }
 
 .cert-card--more.cert-card--wide .cert-card__logo i { font-size: 1.3rem; }
+
+/* ========== Contact — Carte "Parlons-en" ========== */
+.contact-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 24px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+/* Aura indigo, cohérente avec .exp-card / .skill-card */
+.contact-card::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.10) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contact-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.contact-card__text {
+  color: #4a4a57;
+}
+
+.contact-card__text p {
+  margin-bottom: 0.75rem;
+}
+
+.contact-card__lead {
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 0.75rem;
+}
+
+.contact-list {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+  color: inherit;
+  text-decoration: none;
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+
+.contact-link:hover,
+.contact-link:focus-visible {
+  transform: translateY(-4px);
+  border-color: rgba(99, 102, 241, 0.25);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.09);
+  color: inherit;
+}
+
+.contact-link:active {
+  transform: translateY(-1px);
+}
+
+.contact-link__icon {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+  color: #6366f1;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.12);
+  transition: transform .35s ease, background .35s ease, color .35s ease;
+}
+
+.contact-link:hover .contact-link__icon {
+  transform: rotate(-6deg) scale(1.06);
+  background: #6366f1;
+  color: #ffffff;
+}
+
+.contact-link__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contact-link__label {
+  font-size: .58rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #8a8ba0;
+}
+
+.contact-link__value {
+  font-size: .9rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contact-link__chevron {
+  flex: 0 0 auto;
+  font-size: .75rem;
+  color: #b4b5c4;
+  transition: transform .35s ease, color .35s ease;
+}
+
+.contact-link:hover .contact-link__chevron {
+  transform: translateX(3px);
+  color: #6366f1;
+}
+
+/* Variante mise en avant — téléchargement du CV */
+.contact-link--cta {
+  border-color: rgba(99, 102, 241, 0.18);
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.05), rgba(99, 102, 241, 0) 70%), #ffffff;
+}
+
+.contact-link--cta .contact-link__icon {
+  background: #6366f1;
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 6px 14px rgba(99, 102, 241, 0.28);
+}
+
+@media (max-width: 767.98px) {
+  .contact-card {
+    grid-template-columns: 1fr;
+    border-radius: 20px;
+  }
+  .contact-card__text {
+    text-align: center;
+  }
+  .contact-link__icon { width: 38px; height: 38px; border-radius: 12px; }
+  .contact-link__value { font-size: .85rem; }
+}
+
 
 
